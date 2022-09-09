@@ -1,6 +1,8 @@
 package com.prj1.mysticdungeon.system
 
 import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.physics.box2d.*
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.*
 import com.badlogic.gdx.physics.box2d.World
 import com.github.quillraven.fleks.*
 import com.prj1.mysticdungeon.component.ImageComponent
@@ -14,7 +16,11 @@ class PhysicSystem(
     private val phWorld: World,
     private val physicCmps: ComponentMapper<PhysicComponent>,
     private val imageCmps: ComponentMapper<ImageComponent>,
-): IteratingSystem(interval = Fixed(1/60f)) {
+): ContactListener, IteratingSystem(interval = Fixed(1/60f)) {
+    init {
+        phWorld.setContactListener(this)
+    }
+
     override fun onUpdate() {
         if (phWorld.autoClearForces){
             LOG.error { "Auto clear forces must be set to false to guarantee a correct physic simulation." }
@@ -59,4 +65,24 @@ class PhysicSystem(
     companion object{
         private val LOG = logger<PhysicSystem>()
     }
+
+    override fun beginContact(contact: Contact?) {
+
+    }
+
+    override fun endContact(contact: Contact?) {
+    }
+
+    private fun Fixture.isStaticBody() = this.body.type == StaticBody
+
+    private fun Fixture.isDynamicBody() = this.body.type == DynamicBody
+
+    override fun preSolve(contact: Contact, oldManifold: Manifold) {
+        contact.isEnabled = (contact.fixtureA.isDynamicBody()
+                && contact.fixtureB.isStaticBody())
+                || (contact.fixtureA.isStaticBody()
+                && contact.fixtureB.isDynamicBody())
+    }
+
+    override fun postSolve(contact: Contact?, impulse: ContactImpulse?) = Unit
 }

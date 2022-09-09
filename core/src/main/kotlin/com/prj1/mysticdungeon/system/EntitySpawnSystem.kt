@@ -4,6 +4,7 @@ package com.prj1.mysticdungeon.system
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.StaticBody
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
@@ -40,7 +41,7 @@ class EntitySpawnSystem(
             val relativeSize = size(cfg.model)
 
             world.entity {
-                var imageCmp = add<ImageComponent>{
+                val imageCmp = add<ImageComponent>{
                     image = Image().apply {
                         setScaling(Scaling.fill)
                         setSize(relativeSize.x, relativeSize.y)
@@ -53,8 +54,19 @@ class EntitySpawnSystem(
                 }
 
                 physicCmpFromImage(phWorld, imageCmp.image, DynamicBody){ phCmp, width, height ->
+                    val w = width * cfg.physicScaling.x
+                    val h = height * cfg.physicScaling.y
+
                     box(width, height){
-                        isSensor = false
+                        isSensor = cfg.bodyType != StaticBody
+                    }
+
+                    if (cfg.bodyType != StaticBody){
+                        // collision box
+                        val colH = h*0.4f
+                        val collOffset = vec2().apply { set(cfg.physicOffset) }
+                        collOffset.y -= h*0.5f - colH * 0.5f
+                        box(w,colH, collOffset)
                     }
                 }
 
