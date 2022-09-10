@@ -10,9 +10,11 @@ import com.github.quillraven.fleks.ComponentListener
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.EntityCreateCfg
 import com.prj1.mysticdungeon.MysticDungeon.Companion.UNIT_SCALE
+import com.prj1.mysticdungeon.system.CollisionSpawnSystem.Companion.SPAWN_AREA_SIZE
 import ktx.app.gdxError
 import ktx.box2d.BodyDefinition
 import ktx.box2d.body
+import ktx.box2d.circle
 import ktx.box2d.loop
 import ktx.math.vec2
 
@@ -47,6 +49,7 @@ class PhysicComponent {
                                 vec2(bodyW, bodyH),
                                 vec2(0f, bodyH)
                             )
+                            circle(SPAWN_AREA_SIZE + 2f) {isSensor = true}
                         }
                     }
                 }

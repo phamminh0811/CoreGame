@@ -1,6 +1,7 @@
 package com.prj1.mysticdungeon.event
 
 import com.badlogic.gdx.maps.tiled.TiledMap
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.Stage
 
@@ -9,3 +10,5 @@ fun Stage.fire(event: Event){
 }
 
 data class MapChangeEvent(val map: TiledMap) : Event()
+
+class CollisionDespawnEvent(val cell: Cell) : Event()

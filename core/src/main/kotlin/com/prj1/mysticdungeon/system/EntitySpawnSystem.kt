@@ -79,6 +79,10 @@ class EntitySpawnSystem(
                 if (type == "CHAR"){
                     add<PlayerComponent>()
                 }
+
+                if (cfg.bodyType != StaticBody){
+                    add<CollisionComponent>()
+                }
             }
             world.remove(entity)
         }
