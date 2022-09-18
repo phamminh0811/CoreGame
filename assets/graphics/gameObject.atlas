@@ -920,14 +920,14 @@ char_shield_hit_left
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 4
 char_shield_hit_left
   rotate: false
   xy: 336, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 4
+  index: 0
 char_shielded_static_right
   rotate: false
   xy: 384, 240
@@ -941,318 +941,416 @@ char_shield_hit_right
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 4
 char_shield_hit_right
   rotate: false
   xy: 384, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 4
-phantom_death_left
+  index: 0
+chest_idle
   rotate: false
   xy: 432, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-phantom_death_left
+chest_idle
   rotate: false
   xy: 480, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
-phantom_death_right
-  rotate: false
-  xy: 480, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-phantom_death_left
+  index: 1
+chest_idle
   rotate: false
   xy: 528, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
-phantom_death_right
-  rotate: false
-  xy: 528, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-phantom_death_left
+  index: 2
+chest_idle
   rotate: false
   xy: 576, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 5
-phantom_death_right
-  rotate: false
-  xy: 576, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 5
-phantom_death_left
+  index: 3
+chest_idle
   rotate: false
   xy: 624, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 6
-phantom_death_right
-  rotate: false
-  xy: 624, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 6
-phantom_death_right
+  index: 4
+chest_idle
   rotate: false
   xy: 672, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
+  index: 5
+chest_idle
+  rotate: false
+  xy: 720, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+chest_idle
+  rotate: false
+  xy: 720, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
+chest_openned
+  rotate: false
+  xy: 768, 240
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
   index: 0
-phantom_death_right
-  rotate: false
-  xy: 720, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-phantom_death_left
-  rotate: false
-  xy: 720, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-phantom_death_right
-  rotate: false
-  xy: 768, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 4
-phantom_death_left
-  rotate: false
-  xy: 768, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 4
-phantom_death_right
+chest_openning
   rotate: false
   xy: 816, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 7
-phantom_death_left
-  rotate: false
-  xy: 816, 240
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 7
-phantom_hit_left
+  index: 0
+chest_openning
   rotate: false
   xy: 864, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-phantom_hit_left
+  index: 1
+chest_openning
   rotate: false
   xy: 912, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-phantom_hit_left
+  index: 2
+chest_openning
   rotate: false
   xy: 960, 240
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
-phantom_hit_left
+  index: 3
+chest_openning
   rotate: false
   xy: 0, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
-phantom_hit_right
+  index: 4
+phantom_death_left
   rotate: false
   xy: 48, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-phantom_hit_right
+phantom_death_left
   rotate: false
   xy: 96, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-phantom_hit_right
+  index: 2
+phantom_death_right
+  rotate: false
+  xy: 96, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+phantom_death_left
   rotate: false
   xy: 144, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
-phantom_hit_right
+  index: 3
+phantom_death_right
+  rotate: false
+  xy: 144, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+phantom_death_left
   rotate: false
   xy: 192, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
-phantom_idle_left
+  index: 5
+phantom_death_right
+  rotate: false
+  xy: 192, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+phantom_death_left
   rotate: false
   xy: 240, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-phantom_idle_left
+  index: 6
+phantom_death_right
+  rotate: false
+  xy: 240, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+phantom_death_right
   rotate: false
   xy: 288, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-phantom_idle_left
+  index: 0
+phantom_death_right
   rotate: false
   xy: 336, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
-phantom_idle_left
+  index: 1
+phantom_death_left
+  rotate: false
+  xy: 336, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+phantom_death_right
   rotate: false
   xy: 384, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
-phantom_idle_right
+  index: 4
+phantom_death_left
+  rotate: false
+  xy: 384, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+phantom_death_right
   rotate: false
   xy: 432, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-phantom_idle_right
+  index: 7
+phantom_death_left
+  rotate: false
+  xy: 432, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
+phantom_hit_left
   rotate: false
   xy: 480, 288
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
+  index: 0
+phantom_hit_left
+  rotate: false
+  xy: 528, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+phantom_hit_left
+  rotate: false
+  xy: 576, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+phantom_hit_left
+  rotate: false
+  xy: 624, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+phantom_hit_right
+  rotate: false
+  xy: 672, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+phantom_hit_right
+  rotate: false
+  xy: 720, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+phantom_hit_right
+  rotate: false
+  xy: 768, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+phantom_hit_right
+  rotate: false
+  xy: 816, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+phantom_idle_left
+  rotate: false
+  xy: 864, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+phantom_idle_left
+  rotate: false
+  xy: 912, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+phantom_idle_left
+  rotate: false
+  xy: 960, 288
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+phantom_idle_left
+  rotate: false
+  xy: 0, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+phantom_idle_right
+  rotate: false
+  xy: 48, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+phantom_idle_right
+  rotate: false
+  xy: 96, 336
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
   index: 1
 phantom_idle_right
   rotate: false
-  xy: 528, 288
+  xy: 144, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 phantom_idle_right
   rotate: false
-  xy: 576, 288
+  xy: 192, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
 phantom_run_left
   rotate: false
-  xy: 624, 288
+  xy: 240, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 phantom_run_left
   rotate: false
-  xy: 672, 288
+  xy: 288, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 phantom_run_left
   rotate: false
-  xy: 720, 288
+  xy: 336, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 phantom_run_left
   rotate: false
-  xy: 768, 288
+  xy: 384, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
 phantom_run_left
   rotate: false
-  xy: 816, 288
+  xy: 432, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 4
 phantom_run_left
   rotate: false
-  xy: 864, 288
+  xy: 480, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 5
 phantom_run_right
   rotate: false
-  xy: 912, 288
+  xy: 528, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 phantom_run_right
   rotate: false
-  xy: 960, 288
+  xy: 576, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 phantom_run_right
   rotate: false
-  xy: 0, 336
+  xy: 624, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 phantom_run_right
   rotate: false
-  xy: 48, 336
+  xy: 672, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
 phantom_run_right
   rotate: false
-  xy: 96, 336
+  xy: 720, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 4
 phantom_run_right
   rotate: false
-  xy: 144, 336
+  xy: 768, 336
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

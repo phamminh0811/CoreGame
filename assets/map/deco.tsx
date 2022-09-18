@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.9" tiledversion="1.9.1" name="deco" tilewidth="16" tileheight="16" tilecount="256" columns="16">
  <image source="decorative.png" width="256" height="256"/>
- <tile id="16">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="3" y="4" width="9" height="12"/>
-  </objectgroup>
- </tile>
- <tile id="17">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="1" y="0" width="13" height="16"/>
-  </objectgroup>
- </tile>
  <tile id="18">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="4" width="16" height="12"/>
-  </objectgroup>
- </tile>
- <tile id="19">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="3" y="6" width="9" height="10"/>
-  </objectgroup>
- </tile>
- <tile id="20">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="3" y="0" width="9" height="16"/>
   </objectgroup>
  </tile>
  <tile id="21">
@@ -69,31 +49,6 @@
  <tile id="29">
   <objectgroup draworder="index" id="2">
    <object id="1" x="4" y="11" width="5" height="5"/>
-  </objectgroup>
- </tile>
- <tile id="32">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="1.88431" y="0" width="11.2314" height="16"/>
-  </objectgroup>
- </tile>
- <tile id="33">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="1.80392" y="0" width="12.3922" height="16"/>
-  </objectgroup>
- </tile>
- <tile id="34">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="3" y="4" width="9" height="12"/>
-  </objectgroup>
- </tile>
- <tile id="35">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="3" y="0" width="9" height="16"/>
-  </objectgroup>
- </tile>
- <tile id="36">
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="3" y="0" width="9" height="16"/>
   </objectgroup>
  </tile>
  <tile id="37">

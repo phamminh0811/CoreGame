@@ -25,6 +25,7 @@ import ktx.tiled.layer
 import ktx.tiled.type
 import ktx.tiled.x
 import ktx.tiled.y
+import kotlin.math.roundToInt
 
 @AllOf([SpawnComponent::class])
 class EntitySpawnSystem(
@@ -57,8 +58,11 @@ class EntitySpawnSystem(
                     val w = width * cfg.physicScaling.x
                     val h = height * cfg.physicScaling.y
 
+                    phCmp.size.set(w,h)
+
                     box(width, height){
                         isSensor = cfg.bodyType != StaticBody
+                        userData = HIT_BOX_SENSOR
                     }
 
                     if (cfg.bodyType != StaticBody){
@@ -70,9 +74,29 @@ class EntitySpawnSystem(
                     }
                 }
 
-                if (cfg.speedScaling > 0) {
+                if (cfg.speedScaling > 0f) {
                     add<MoveComponent> {
                         speed = DEFAULT_SPEED * cfg.speedScaling
+                    }
+                }
+
+                if (cfg.canAttack){
+                    add<AttackComponent>{
+                        maxDelay = cfg.attackDelay
+                        damage = (DEFAULT_ATTACK_DAMAGE * cfg.attackScaling).roundToInt()
+                        frontExtraRange = cfg.attackExtraFrontRange
+                        sideExtraRange = cfg.attackExtraSideRange
+                    }
+                    add<DefendComponent>{
+                        def = (DEFAULT_DEFEND * cfg.defendScaling).roundToInt()
+                        shieldDef = cfg.defendShield
+                    }
+                }
+
+                if (cfg.lifeScaling > 0f){
+                    add<LifeComponent>{
+                        max = DEFAULT_LIFE  * cfg.lifeScaling
+                        life = max
                     }
                 }
 
@@ -89,7 +113,11 @@ class EntitySpawnSystem(
     }
 
     private fun size(model: AnimationModel): Vector2 = cachedSizes.getOrPut(model) {
-        val regions = atlas.findRegions("${model.atlasKey}_${AnimationType.IDLE.atlasKey}_${DirectionType.LEFT.atlasKey}")
+        val regions = if (model == AnimationModel.CHEST) {
+             atlas.findRegions("${model.atlasKey}_${AnimationType.IDLE.atlasKey}")
+        } else {
+            atlas.findRegions("${model.atlasKey}_${AnimationType.IDLE.atlasKey}_${DirectionType.LEFT.atlasKey}")
+        }
         if (regions.isEmpty){
             gdxError("There are no regions for the idle animation of model $model")
         }
@@ -100,8 +128,24 @@ class EntitySpawnSystem(
 
     private fun spawnCfg(type: String): SpawnCfg = cachedCfgs.getOrPut(type) {
         when (type) {
-            "CHAR" -> SpawnCfg(AnimationModel.CHAR)
-            "PHANTOM" -> SpawnCfg(AnimationModel.PHANTOM)
+            "CHAR" -> SpawnCfg(
+                AnimationModel.CHAR,
+                attackExtraFrontRange = 1f,
+                attackExtraSideRange = 0.6f,
+                attackScaling = 1.25f,
+                defendShield = 7
+            )
+            "PHANTOM" -> SpawnCfg(
+                AnimationModel.PHANTOM,
+                lifeScaling = 0.75f,
+            )
+            "CHEST" -> SpawnCfg(
+                AnimationModel.CHEST,
+                speedScaling = 0f,
+                lifeScaling = 0f,
+                canAttack = false,
+                bodyType = StaticBody
+            )
             else -> gdxError("Type $type has no SpawnCfg setup")
         }
     }
@@ -124,5 +168,9 @@ class EntitySpawnSystem(
         }
 
         return false
+    }
+
+    companion object{
+        const val HIT_BOX_SENSOR = "Hitbox"
     }
 }

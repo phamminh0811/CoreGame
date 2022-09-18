@@ -4,16 +4,17 @@ import com.github.quillraven.fleks.AllOf
 import com.github.quillraven.fleks.ComponentMapper
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.IteratingSystem
-import com.prj1.mysticdungeon.component.MoveComponent
-import com.prj1.mysticdungeon.component.PhysicComponent
+import com.prj1.mysticdungeon.component.*
 import ktx.math.component1
 import ktx.math.component2
 
 @AllOf([MoveComponent::class, PhysicComponent::class])
 class MoveSystem(
     private val moveCmps: ComponentMapper<MoveComponent>,
-    private val physicCmps: ComponentMapper<PhysicComponent>
+    private val physicCmps: ComponentMapper<PhysicComponent>,
 ): IteratingSystem() {
+
+
     override fun onTickEntity(entity: Entity) {
         val moveCmp = moveCmps[entity]
         val physicCmp = physicCmps[entity]

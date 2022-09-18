@@ -2,6 +2,7 @@ package com.prj1.mysticdungeon.component
 
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Shape2D
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType
 import com.badlogic.gdx.physics.box2d.World
@@ -18,9 +19,12 @@ import ktx.box2d.circle
 import ktx.box2d.loop
 import ktx.math.vec2
 
-class PhysicComponent {
+class PhysicComponent(
+    val impulse: Vector2 = vec2(),
+    val size: Vector2 = vec2(),
+) {
     val prevPos = vec2()
-    val impulse = vec2()
+
     lateinit var body: Body
 
     companion object{
@@ -49,7 +53,7 @@ class PhysicComponent {
                                 vec2(bodyW, bodyH),
                                 vec2(0f, bodyH)
                             )
-                            circle(SPAWN_AREA_SIZE + 2f) {isSensor = true}
+
                         }
                     }
                 }
@@ -67,6 +71,7 @@ class PhysicComponent {
             val y = image.y
             val w = image.width
             val h = image.height
+
             return add{
                 body = world.body(bodyType){
                     position.set(x+ w*0.5f, y+ h*0.5f)

@@ -35,17 +35,20 @@ class GameScreen : KtxScreen{
         }
 
         components {
-            add<ImageComponentListener>()
             add<PhysicComponentListener>()
+            add<ImageComponentListener>()
         }
 
         systems {
             add<EntitySpawnSystem>()
             add<CollisionSpawnSystem>()
             add<CollisionDespawnSystem>()
-            add<MoveSystem>()
             add<PhysicSystem>()
             add<AnimationSystem>()
+            add<MoveSystem>()
+            add<AttackSystem>()
+            add<DeadSystem>()
+            add<LifeSystem>()
             add<CameraSystem>()
             add<RenderSystem>()
             add<DebugSystem>()
@@ -64,7 +67,7 @@ class GameScreen : KtxScreen{
         val currentMap = TmxMapLoader().load("map/map1.tmx")
         stage.fire(MapChangeEvent(currentMap!!))
 
-        PlayerKeyboardInputProcessor(eWorld, eWorld.mapper())
+        PlayerKeyboardInputProcessor(eWorld)
     }
 
     override fun resize(width: Int, height: Int) {

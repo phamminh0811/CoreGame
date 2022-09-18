@@ -22,7 +22,6 @@ import ktx.math.component1
 import ktx.math.component2
 import ktx.math.vec2
 import ktx.tiled.*
-import kotlin.math.max
 
 @AllOf([PhysicComponent::class, CollisionComponent::class])
 class CollisionSpawnSystem(
