@@ -10,7 +10,7 @@ enum class AnimationModel{
 }
 
 enum class AnimationType{
-    IDLE, RUN, HIT, ATTACK, CLIMB, FALLING, DEATH, SHIELD_HIT, SHIELDED_STATIC, OPENNING, OPENNED, UNDERFINED;
+    IDLE, RUN, HIT, ATTACK, CLIMB, FALLING, DEAD, SHIELD_HIT, SHIELDED_STATIC, OPENNING, OPENNED, UNDERFINED;
 
     var atlasKey: String = this.toString().lowercase()
 }
@@ -28,6 +28,9 @@ data class AnimationComponent(
     var stateTime: Float = 0f,
     var playMode: Animation.PlayMode = Animation.PlayMode.LOOP
 ) {
+    val isAnimationDone: Boolean
+        get() = animation.isAnimationFinished(stateTime)
+
     lateinit var animation: Animation<TextureRegionDrawable>
     var nextAnimation: String = NO_ANIMATION
 

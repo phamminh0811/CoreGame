@@ -102,6 +102,7 @@ class EntitySpawnSystem(
 
                 if (type == "CHAR"){
                     add<PlayerComponent>()
+                    add<StateComponent>()
                 }
 
                 if (cfg.bodyType != StaticBody){

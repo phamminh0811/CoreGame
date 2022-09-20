@@ -7,10 +7,7 @@ import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.github.quillraven.fleks.AllOf
-import com.github.quillraven.fleks.ComponentMapper
-import com.github.quillraven.fleks.Entity
-import com.github.quillraven.fleks.IteratingSystem
+import com.github.quillraven.fleks.*
 import com.github.quillraven.fleks.collection.compareEntity
 import com.prj1.mysticdungeon.MysticDungeon.Companion.UNIT_SCALE
 import com.prj1.mysticdungeon.component.ImageComponent
@@ -20,7 +17,8 @@ import ktx.tiled.forEachLayer
 
 @AllOf([ImageComponent::class])
 class RenderSystem (
-    private var stage: Stage,
+    private var gameStage: Stage,
+    @Qualifier("uiStage") private var uiStage: Stage,
     private var imageCmps: ComponentMapper<ImageComponent>
     ): EventListener, IteratingSystem(
     comparator = compareEntity { e1, e2 ->  imageCmps[e1].compareTo(imageCmps[e2])}
@@ -29,20 +27,20 @@ class RenderSystem (
     private var gateLayer = mutableListOf<TiledMapTileLayer>()
     private var fgdLayers = mutableListOf<TiledMapTileLayer>()
     private var bgdLayers = mutableListOf<TiledMapTileLayer>()
-    private var mapRenderer = OrthogonalTiledMapRenderer(null, UNIT_SCALE, stage.batch)
-    private var orthoCam = stage.camera as OrthographicCamera
+    private var mapRenderer = OrthogonalTiledMapRenderer(null, UNIT_SCALE, gameStage.batch)
+    private var orthoCam = gameStage.camera as OrthographicCamera
 
     override fun onTick() {
         super.onTick()
 
-        with(stage){
+        with(gameStage){
             viewport.apply()
 
             AnimatedTiledMapTile.updateAnimationBaseTime()
             mapRenderer.setView(orthoCam)
 
             if (bgdLayers.isNotEmpty()){
-                stage.batch.use(orthoCam.combined){
+                gameStage.batch.use(orthoCam.combined){
                     bgdLayers.forEach{ mapRenderer.renderTileLayer(it)}
                 }
             }
@@ -51,16 +49,23 @@ class RenderSystem (
             draw()
 
             if (fgdLayers.isNotEmpty()){
-                stage.batch.use(orthoCam.combined){
+                gameStage.batch.use(orthoCam.combined){
                     fgdLayers.forEach{ mapRenderer.renderTileLayer(it)}
                 }
             }
 
             if (gateLayer.isNotEmpty()){
-                stage.batch.use(orthoCam.combined){
+                gameStage.batch.use(orthoCam.combined){
                     gateLayer.forEach{ mapRenderer.renderTileLayer(it)}
                 }
             }
+        }
+
+//        render UI
+        with(uiStage){
+            viewport.apply()
+            act(deltaTime)
+            draw()
         }
     }
 

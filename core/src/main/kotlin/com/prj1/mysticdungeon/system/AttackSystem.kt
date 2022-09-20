@@ -104,7 +104,9 @@ class AttackSystem(
                 }
                 return@query true
             }
-
+        }
+        val isDone = animCmps.getOrNull(entity)?.isAnimationDone ?: true
+        if (isDone){
             attackCmp.state = AttackState.READY
         }
     }
