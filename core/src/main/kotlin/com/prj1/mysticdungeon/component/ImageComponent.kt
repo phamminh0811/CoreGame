@@ -4,17 +4,18 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.github.quillraven.fleks.ComponentListener
 import com.github.quillraven.fleks.Entity
+import com.prj1.mysticdungeon.actor.UpdatableImage
 
 class ImageComponent : Comparable<ImageComponent>{
-    lateinit var image: Image
+    var image: UpdatableImage? = null
 
     override fun compareTo(other: ImageComponent): Int {
-        var yDiff = other.image.y.compareTo(image.y)
+        val yDiff = other.image!!.y.compareTo(image!!.y)
 
         return if (yDiff != 0){
             yDiff
         } else{
-            other.image.x.compareTo(image.x)
+            other.image!!.x.compareTo(image!!.x)
         }
     }
 

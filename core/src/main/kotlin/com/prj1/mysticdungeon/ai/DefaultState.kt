@@ -46,7 +46,8 @@ enum class DefaultState : EntityState{
                 entity.changeToPreviousState()
             } else if(attackCmp.isReady){
 //                start another attack
-                entity.animation(AnimationType.ATTACK, entity.animCmp.dir, PlayMode.NORMAL, true)
+                entity.resetAnimation()
+                attackCmp.startAttack()
             }
         }
 

@@ -1,20 +1,26 @@
 package com.prj1.mysticdungeon.system
 
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Rectangle
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.World
 import com.github.quillraven.fleks.*
+import com.prj1.mysticdungeon.MysticDungeon
 import com.prj1.mysticdungeon.component.*
 import com.prj1.mysticdungeon.component.DirectionType.*
 import com.prj1.mysticdungeon.system.EntitySpawnSystem.Companion.HIT_BOX_SENSOR
+import ktx.app.gdxError
 import ktx.box2d.query
 import ktx.math.component1
 import ktx.math.component2
+import ktx.math.vec2
 
 @AllOf([AttackComponent::class, PhysicComponent::class, ImageComponent::class])
 class AttackSystem(
     private val phWorld: World,
+    private val atlas: TextureAtlas,
     private val attackCmps: ComponentMapper<AttackComponent>,
     private val physicCmps: ComponentMapper<PhysicComponent>,
     private val imageCmps: ComponentMapper<ImageComponent>,
@@ -22,16 +28,46 @@ class AttackSystem(
     private val defCmps: ComponentMapper<DefendComponent>,
     private val lifeCmps: ComponentMapper<LifeComponent>
 ): IteratingSystem() {
+
+    private fun attackSize(dir: DirectionType) : Vector2 {
+        val regions = atlas.findRegions("${AnimationModel.CHAR.atlasKey}_${AnimationType.ATTACK.atlasKey}_${dir.atlasKey}")
+        if (regions.isEmpty){
+            gdxError("There are no regions for attack model")
+        }
+
+        val firstFrame = regions.first()
+        return vec2(firstFrame.originalWidth * MysticDungeon.UNIT_SCALE, firstFrame.originalHeight * MysticDungeon.UNIT_SCALE)
+    }
+
+    private fun updateAttackImage(entity: Entity, dir: DirectionType){
+        imageCmps.getOrNull(entity)?.let { imageCmp ->
+            imageCmp.image?.isAttacking = true
+            imageCmp.image?.dir = dir
+            imageCmp.image?.size = attackSize(dir)
+        }
+    }
+
+    private fun updateNonAttackImage(entity: Entity){
+        imageCmps.getOrNull(entity)?.let { imageCmp ->
+            imageCmp.image?.isAttacking = false
+            imageCmp.image?.dir = NONE
+            imageCmp.image?.size = vec2()
+        }
+    }
+
     override fun onTickEntity(entity: Entity) {
         val attackCmp = attackCmps[entity]
+        val animation = animCmps[entity]
 
         if(attackCmp.isReady && !attackCmp.doAttack){
 //            entity doesn't want to attack and is not executing an attack
+            updateNonAttackImage(entity)
             return
         }
 
         if(attackCmp.isPrepared && attackCmp.doAttack){
 //            attack intention and is ready to attack -> start the attack
+            updateAttackImage(entity, animation.dir)
             attackCmp.doAttack = false
             attackCmp.state = AttackState.ATTACKING
             attackCmp.delay = attackCmp.maxDelay
@@ -50,7 +86,6 @@ class AttackSystem(
             val halfW = w * 0.5f
             val halfH = h * 0.5f
 
-            val animation = animCmps[entity]
             if (animation.dir == LEFT){
                 FRONT_RECT.set(
                     x - halfW - attackCmp.frontExtraRange,
@@ -108,6 +143,7 @@ class AttackSystem(
         val isDone = animCmps.getOrNull(entity)?.isAnimationDone ?: true
         if (isDone){
             attackCmp.state = AttackState.READY
+            updateNonAttackImage(entity)
         }
     }
 
@@ -117,3 +153,6 @@ class AttackSystem(
         val RIGHT_RECT = Rectangle()
     }
 }
+
+// Problem: Attack twice can deal damage, attack once is not
+//          Offset wrong

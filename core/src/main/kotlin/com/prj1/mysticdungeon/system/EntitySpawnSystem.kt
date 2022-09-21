@@ -15,6 +15,7 @@ import com.github.quillraven.fleks.ComponentMapper
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.IteratingSystem
 import com.prj1.mysticdungeon.MysticDungeon.Companion.UNIT_SCALE
+import com.prj1.mysticdungeon.actor.UpdatableImage
 import com.prj1.mysticdungeon.component.*
 import com.prj1.mysticdungeon.component.PhysicComponent.Companion.physicCmpFromImage
 import com.prj1.mysticdungeon.event.MapChangeEvent
@@ -43,7 +44,7 @@ class EntitySpawnSystem(
 
             world.entity {
                 val imageCmp = add<ImageComponent>{
-                    image = Image().apply {
+                    image = UpdatableImage().apply {
                         setScaling(Scaling.fill)
                         setSize(relativeSize.x, relativeSize.y)
                         setPosition(location.x, location.y)
@@ -54,7 +55,7 @@ class EntitySpawnSystem(
                     nextAnimation(cfg.model, AnimationType.IDLE, DirectionType.LEFT)
                 }
 
-                physicCmpFromImage(phWorld, imageCmp.image, DynamicBody){ phCmp, width, height ->
+                physicCmpFromImage(phWorld, imageCmp.image!!, DynamicBody){ phCmp, width, height ->
                     val w = width * cfg.physicScaling.x
                     val h = height * cfg.physicScaling.y
 
@@ -167,7 +168,6 @@ class EntitySpawnSystem(
                 return true
             }
         }
-
         return false
     }
 

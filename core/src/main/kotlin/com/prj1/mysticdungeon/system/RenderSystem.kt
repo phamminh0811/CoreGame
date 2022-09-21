@@ -70,7 +70,7 @@ class RenderSystem (
     }
 
     override fun onTickEntity(entity: Entity) {
-        imageCmps[entity].image.toFront()
+        imageCmps[entity].image?.toFront()
     }
 
     override fun handle(event: Event?): Boolean {

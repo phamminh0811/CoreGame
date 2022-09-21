@@ -23,7 +23,7 @@ class AnimationSystem (
     private var cacherAnimation = mutableMapOf<String,Animation<TextureRegionDrawable>>()
 
     override fun onTickEntity(entity: Entity) {
-        var aniCmp = animationCmps[entity]
+        val aniCmp = animationCmps[entity]
 
         if (aniCmp.nextAnimation == NO_ANIMATION){
             aniCmp.stateTime += deltaTime
@@ -34,7 +34,7 @@ class AnimationSystem (
         }
 
         aniCmp.animation.playMode = aniCmp.playMode
-        imageCmps[entity].image.drawable  = aniCmp.animation.getKeyFrame(aniCmp.stateTime)
+        imageCmps[entity].image?.drawable  = aniCmp.animation.getKeyFrame(aniCmp.stateTime)
     }
 
     private fun animation(aniKeyPath: String): Animation<TextureRegionDrawable> {

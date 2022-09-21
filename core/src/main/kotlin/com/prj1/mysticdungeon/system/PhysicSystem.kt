@@ -63,7 +63,7 @@ class PhysicSystem(
         val (bodyX, bodyY) = physicCmp.body.position
 
 //        bottom left of box
-        imageCmp.image.run{
+        imageCmp.image?.run{
             setPosition(
                 MathUtils.lerp(preX, bodyX, alpha) - width * 0.5f ,
                 MathUtils.lerp(preY, bodyY, alpha) - height * 0.5f)
