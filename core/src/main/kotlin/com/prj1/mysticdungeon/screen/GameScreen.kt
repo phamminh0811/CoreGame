@@ -1,5 +1,6 @@
 package com.prj1.mysticdungeon.screen
 
+import com.badlogic.gdx.ai.GdxAI
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
@@ -7,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.utils.viewport.ExtendViewport
 import com.github.quillraven.fleks.world
+import com.prj1.mysticdungeon.component.AiComponent
+import com.prj1.mysticdungeon.component.AiComponent.Companion.AiComponentListener
 import com.prj1.mysticdungeon.component.FloatingTextComponent.Companion.FloatingTextComponentListener
 import com.prj1.mysticdungeon.component.ImageComponent.Companion.ImageComponentListener
 import com.prj1.mysticdungeon.component.PhysicComponent.Companion.PhysicComponentListener
@@ -43,19 +46,21 @@ class GameScreen : KtxScreen{
             add<ImageComponentListener>()
             add<FloatingTextComponentListener>()
             add<StateComponentListener>()
+            add< AiComponentListener>()
         }
 
         systems {
             add<EntitySpawnSystem>()
             add<CollisionSpawnSystem>()
             add<CollisionDespawnSystem>()
-            add<PhysicSystem>()
-            add<AnimationSystem>()
-            add<StateSystem>()
             add<MoveSystem>()
             add<AttackSystem>()
             add<DeadSystem>()
             add<LifeSystem>()
+            add<PhysicSystem>()
+            add<AnimationSystem>()
+            add<StateSystem>()
+            add<AiSystem>()
             add<CameraSystem>()
             add<FloatingTextSystem>()
             add<RenderSystem>()
@@ -84,7 +89,9 @@ class GameScreen : KtxScreen{
     }
 
     override fun render(delta: Float) {
-        eWorld.update(delta.coerceAtMost(0.25f))
+        val dt = delta.coerceAtMost(0.25f)
+        GdxAI.getTimepiece().update(dt)
+        eWorld.update(dt)
     }
 
     override fun dispose() {

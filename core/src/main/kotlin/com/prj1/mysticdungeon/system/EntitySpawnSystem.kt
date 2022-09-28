@@ -21,6 +21,7 @@ import com.prj1.mysticdungeon.component.PhysicComponent.Companion.physicCmpFromI
 import com.prj1.mysticdungeon.event.MapChangeEvent
 import ktx.app.gdxError
 import ktx.box2d.box
+import ktx.box2d.circle
 import ktx.math.vec2
 import ktx.tiled.layer
 import ktx.tiled.type
@@ -55,7 +56,7 @@ class EntitySpawnSystem(
                     nextAnimation(cfg.model, AnimationType.IDLE, DirectionType.RIGHT)
                 }
 
-                physicCmpFromImage(phWorld, imageCmp.image!!, DynamicBody){ phCmp, width, height ->
+                val physicCmp = physicCmpFromImage(phWorld, imageCmp.image!!, DynamicBody){ phCmp, width, height ->
                     val w = width * cfg.physicScaling.x
                     val h = height * cfg.physicScaling.y
 
@@ -110,6 +111,17 @@ class EntitySpawnSystem(
                 if (cfg.bodyType != StaticBody){
                     add<CollisionComponent>()
                 }
+
+                if (cfg.aiTreePath.isNotBlank()){
+                    add<AiComponent>{
+                        treePath = cfg.aiTreePath
+                    }
+
+                    physicCmp.body.circle(4f){
+                        isSensor = true
+                        userData = AI_SENSOR
+                    }
+                }
             }
             world.remove(entity)
         }
@@ -141,17 +153,23 @@ class EntitySpawnSystem(
             "Phantom" -> SpawnCfg(
                 AnimationModel.PHANTOM,
                 lifeScaling = 0.75f,
+                attackExtraFrontRange = 0.5f,
+                aiTreePath = "ai/enemy.tree"
             )
             "Slime" -> SpawnCfg(
                 AnimationModel.SLIME,
                 lifeScaling = 0.5f,
-                physicScaling = vec2(0.4f, 0.4f)
+                attackExtraFrontRange = 0.5f,
+                physicScaling = vec2(0.4f, 0.4f),
+                aiTreePath = "ai/enemy.tree"
             )
             "Ghoul" -> SpawnCfg(
                 AnimationModel.GHOUL,
                 lifeScaling = 1.5f,
+                attackExtraFrontRange = 0.5f,
                 defendScaling = 1.5f,
-                physicScaling = vec2(0.8f, 0.8f)
+                physicScaling = vec2(0.8f, 0.8f),
+                aiTreePath = "ai/enemy.tree"
             )
             "CHEST" -> SpawnCfg(
                 AnimationModel.CHEST,
@@ -185,5 +203,6 @@ class EntitySpawnSystem(
 
     companion object{
         const val HIT_BOX_SENSOR = "Hitbox"
+        const val AI_SENSOR = "Ai"
     }
 }

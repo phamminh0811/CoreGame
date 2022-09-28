@@ -17,7 +17,7 @@ data class StateComponent (
                private val world: World
           ): ComponentListener<StateComponent>{
                override fun onComponentAdded(entity: Entity, component: StateComponent) {
-                    component.stateMachine.owner = AiEntity(world, entity)
+                    component.stateMachine.owner = AiEntity(entity, world)
                }
 
                override fun onComponentRemoved(entity: Entity, component: StateComponent) = Unit

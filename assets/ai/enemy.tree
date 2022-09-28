@@ -1,0 +1,15 @@
+import idle:"com.prj1.mysticdungeon.ai.IdleTask"
+import wander:"com.prj1.mysticdungeon.ai.WanderTask"
+import attack:"com.prj1.mysticdungeon.ai.AttackTask"
+import isEnemyNearBy?:"com.prj1.mysticdungeon.ai.IsEnemyNearBy"
+import canAttack?:"com.prj1.mysticdungeon.ai.CanAttack"
+
+subtree name:"attack"
+    sequence
+        (isEnemyNearBy?) (canAttack?) attack
+        wait seconds:"uniform,1.25,2.1"
+root
+    selector
+        $attack
+        (random success:0.25) idle duration:"uniform,2.0,3.5"
+        wander
