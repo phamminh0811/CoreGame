@@ -40,6 +40,10 @@ class PlayerKeyboardInputProcessor(
 
             }
             return true
+        } else if (keycode == SHIFT_LEFT){
+            playerEntities.forEach {
+                moveCmps[it].speed *= 3
+            }
         }
         return false
     }
@@ -54,6 +58,10 @@ class PlayerKeyboardInputProcessor(
             }
             updatePlayerMovement()
             return true
+        } else if (keycode == SHIFT_LEFT){
+            playerEntities.forEach {
+                moveCmps[it].speed /= 3
+            }
         }
         return false
     }

@@ -41,9 +41,11 @@ class AttackSystem(
 
     private fun updateAttackImage(entity: Entity, dir: DirectionType){
         imageCmps.getOrNull(entity)?.let { imageCmp ->
-            imageCmp.image?.isAttacking = true
-            imageCmp.image?.dir = dir
-            imageCmp.image?.size = attackSize(dir)
+           if (imageCmp.image?.isChar == true){
+               imageCmp.image?.isAttacking = true
+               imageCmp.image?.dir = dir
+               imageCmp.image?.size = attackSize(dir)
+           }
         }
     }
 
@@ -140,6 +142,7 @@ class AttackSystem(
                 return@query true
             }
         }
+
         val isDone = animCmps.getOrNull(entity)?.isAnimationDone ?: true
         if (isDone){
             attackCmp.state = AttackState.READY
@@ -155,4 +158,3 @@ class AttackSystem(
 }
 
 // Problem: Attack twice can deal damage, attack once is not
-//          Offset wrong

@@ -52,7 +52,7 @@ class EntitySpawnSystem(
                 }
 
                 add<AnimationComponent>{
-                    nextAnimation(cfg.model, AnimationType.IDLE, DirectionType.LEFT)
+                    nextAnimation(cfg.model, AnimationType.IDLE, DirectionType.RIGHT)
                 }
 
                 physicCmpFromImage(phWorld, imageCmp.image!!, DynamicBody){ phCmp, width, height ->
@@ -61,7 +61,7 @@ class EntitySpawnSystem(
 
                     phCmp.size.set(w,h)
 
-                    box(width, height){
+                    box(w, h){
                         isSensor = cfg.bodyType != StaticBody
                         userData = HIT_BOX_SENSOR
                     }
@@ -101,9 +101,10 @@ class EntitySpawnSystem(
                     }
                 }
 
-                if (type == "CHAR"){
+                if (type == "Char"){
                     add<PlayerComponent>()
                     add<StateComponent>()
+                    imageCmp.image?.isChar = true
                 }
 
                 if (cfg.bodyType != StaticBody){
@@ -118,7 +119,7 @@ class EntitySpawnSystem(
         val regions = if (model == AnimationModel.CHEST) {
              atlas.findRegions("${model.atlasKey}_${AnimationType.IDLE.atlasKey}")
         } else {
-            atlas.findRegions("${model.atlasKey}_${AnimationType.IDLE.atlasKey}_${DirectionType.LEFT.atlasKey}")
+            atlas.findRegions("${model.atlasKey}_${AnimationType.IDLE.atlasKey}_${DirectionType.RIGHT.atlasKey}")
         }
         if (regions.isEmpty){
             gdxError("There are no regions for the idle animation of model $model")
@@ -130,16 +131,27 @@ class EntitySpawnSystem(
 
     private fun spawnCfg(type: String): SpawnCfg = cachedCfgs.getOrPut(type) {
         when (type) {
-            "CHAR" -> SpawnCfg(
+            "Char" -> SpawnCfg(
                 AnimationModel.CHAR,
                 attackExtraFrontRange = 1f,
                 attackExtraSideRange = 0.6f,
                 attackScaling = 1.25f,
                 defendShield = 7
             )
-            "PHANTOM" -> SpawnCfg(
+            "Phantom" -> SpawnCfg(
                 AnimationModel.PHANTOM,
                 lifeScaling = 0.75f,
+            )
+            "Slime" -> SpawnCfg(
+                AnimationModel.SLIME,
+                lifeScaling = 0.5f,
+                physicScaling = vec2(0.4f, 0.4f)
+            )
+            "Ghoul" -> SpawnCfg(
+                AnimationModel.GHOUL,
+                lifeScaling = 1.5f,
+                defendScaling = 1.5f,
+                physicScaling = vec2(0.8f, 0.8f)
             )
             "CHEST" -> SpawnCfg(
                 AnimationModel.CHEST,

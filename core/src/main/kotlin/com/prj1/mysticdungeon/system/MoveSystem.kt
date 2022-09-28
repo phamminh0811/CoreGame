@@ -12,6 +12,7 @@ import ktx.math.component2
 class MoveSystem(
     private val moveCmps: ComponentMapper<MoveComponent>,
     private val physicCmps: ComponentMapper<PhysicComponent>,
+    private val imageCmps: ComponentMapper<ImageComponent>
 ): IteratingSystem() {
 
 
@@ -34,5 +35,11 @@ class MoveSystem(
             mass * (moveCmp.speed * moveCmp.cos - velX),
             mass * (moveCmp.speed * moveCmp.sin - velY)
         )
+
+        imageCmps.getOrNull(entity)?.let {  imageCmp ->
+            if (moveCmp.cos !=0f){
+                imageCmp.image?.isFlip = moveCmp.cos < 0
+            }
+        }
     }
 }

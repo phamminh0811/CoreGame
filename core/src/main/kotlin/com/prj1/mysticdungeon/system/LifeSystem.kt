@@ -2,15 +2,13 @@ package com.prj1.mysticdungeon.system
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle
 import com.github.quillraven.fleks.*
-import com.prj1.mysticdungeon.component.DeadComponent
-import com.prj1.mysticdungeon.component.FloatingTextComponent
-import com.prj1.mysticdungeon.component.LifeComponent
-import com.prj1.mysticdungeon.component.PhysicComponent
+import com.prj1.mysticdungeon.component.*
 import kotlin.math.roundToInt
 
 @AllOf([LifeComponent::class])
@@ -19,6 +17,8 @@ class LifeSystem(
     private val lifeCmps: ComponentMapper<LifeComponent>,
     private val deadCmps: ComponentMapper<DeadComponent>,
     private val physicCmps: ComponentMapper<PhysicComponent>,
+    private val playerCmps: ComponentMapper<PlayerComponent>,
+    private val aniCmps: ComponentMapper<AnimationComponent>,
 ) : IteratingSystem(){
     private val damageFont = BitmapFont(Gdx.files.internal("damage.fnt"))
     private val floatingTextStyle = LabelStyle(damageFont, Color.WHITE)
@@ -34,8 +34,17 @@ class LifeSystem(
         }
 
         if (lifeCmp.isDead){
+            aniCmps.getOrNull(entity)?.let { aniCmp ->
+//                gameStage.fire(EntityDeathEvent(aniCmp.atlasKey))
+                aniCmp.nextAnimation(aniCmp.model, AnimationType.DEAD, DirectionType.NONE)
+                aniCmp.playMode = Animation.PlayMode.NORMAL
+            }
             configureEntity(entity){
-                deadCmps.add(it)
+                deadCmps.add(it){
+                    if (it in playerCmps){
+                        reviveTime = 7f
+                    }
+                }
             }
         }
     }

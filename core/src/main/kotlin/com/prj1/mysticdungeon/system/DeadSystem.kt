@@ -1,22 +1,33 @@
 package com.prj1.mysticdungeon.system
 
-import com.github.quillraven.fleks.AllOf
-import com.github.quillraven.fleks.ComponentMapper
-import com.github.quillraven.fleks.Entity
-import com.github.quillraven.fleks.IteratingSystem
-import com.prj1.mysticdungeon.component.DeadComponent
-import com.prj1.mysticdungeon.component.PlayerComponent
+import com.github.quillraven.fleks.*
+import com.prj1.mysticdungeon.ai.DefaultState
+import com.prj1.mysticdungeon.component.*
+
 
 @AllOf([DeadComponent::class])
 class DeadSystem(
-    private val playerCmps: ComponentMapper<PlayerComponent>
+    private val playerCmps: ComponentMapper<PlayerComponent>,
+    private val stateCmps: ComponentMapper<StateComponent>,
+    private val lifeCmps: ComponentMapper<LifeComponent>,
+    private val deadCmps: ComponentMapper<DeadComponent>,
 ) : IteratingSystem(){
     override fun onTickEntity(entity: Entity) {
-        if (entity in playerCmps){
-//            TODO: Game Over
+        val deadCmp = deadCmps[entity]
+
+        if (deadCmp.reviveTime ==0f){
+            world.remove(entity)
             return
         }
 
-        world.remove(entity)
+        deadCmp.reviveTime -= deltaTime
+        if (deadCmp.reviveTime <=0f){
+            with(lifeCmps[entity]){ life = max}
+            stateCmps.getOrNull(entity)?.let { stateCmp ->
+                stateCmp.nextState = DefaultState.RESURRECT
+            }
+            configureEntity(entity) {deadCmps.remove(entity)}
+        }
     }
+
 }

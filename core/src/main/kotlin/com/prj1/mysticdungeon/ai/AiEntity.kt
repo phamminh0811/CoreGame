@@ -13,7 +13,13 @@ data class AiEntity (
     private val animationCmps: ComponentMapper<AnimationComponent> = world.mapper(),
     private val moveCmps: ComponentMapper<MoveComponent> = world.mapper(),
     private val attackCmps: ComponentMapper<AttackComponent> = world.mapper(),
+    private val lifeCmps: ComponentMapper<LifeComponent> = world.mapper(),
 ) {
+    val isAnimationDone: Boolean
+        get() = animCmp.isAnimationDone
+    val isDead: Boolean
+        get() = lifeCmps[entity].isDead
+
     val wantsToRun: Boolean
         get() {
             val moveCmp = moveCmps[entity]
@@ -43,8 +49,13 @@ data class AiEntity (
         animationCmps[entity].stateTime = 0f
     }
 
-    fun state(newState: EntityState) {
-        stateCmps[entity].nextState = newState
+    fun state(newState: EntityState, immediateChange: Boolean = false) {
+        with (stateCmps[entity]){
+            nextState = newState
+            if (immediateChange){
+                stateMachine.changeState(nextState)
+            }
+        }
     }
 
     fun changeToPreviousState() {
@@ -60,6 +71,16 @@ data class AiEntity (
     fun root(enable: Boolean) {
         with(moveCmps[entity]){
             root = enable
+        }
+    }
+
+    fun enableGlobalState(enable: Boolean) {
+        with(stateCmps[entity]){
+            if (enable){
+                stateMachine.globalState = DefaultGlobalState.CHECK_ALIVE
+            } else {
+                stateMachine.globalState = null
+            }
         }
     }
 }

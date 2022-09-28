@@ -2,12 +2,17 @@ package com.prj1.mysticdungeon.ai
 
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode
 import com.prj1.mysticdungeon.component.AnimationType
+import com.prj1.mysticdungeon.component.DirectionType
 
 
 enum class DefaultState : EntityState{
     IDLE{
         override fun enter(entity: AiEntity) {
-            entity.animation(AnimationType.IDLE, entity.animCmp.dir)
+            if (entity.animCmp.dir == DirectionType.NONE){
+                entity.animation(AnimationType.IDLE, DirectionType.RIGHT)
+            } else{
+                entity.animation(AnimationType.IDLE, entity.animCmp.dir)
+            }
         }
 
         override fun update(entity: AiEntity) {
@@ -19,7 +24,11 @@ enum class DefaultState : EntityState{
         },
     RUN{
         override fun enter(entity: AiEntity) {
-            entity.animation(AnimationType.RUN, entity.animCmp.dir)
+            if (entity.animCmp.dir == DirectionType.NONE){
+                entity.animation(AnimationType.RUN, DirectionType.RIGHT)
+            } else{
+                entity.animation(AnimationType.RUN, entity.animCmp.dir)
+            }
         }
 
         override fun update(entity: AiEntity) {
@@ -52,8 +61,31 @@ enum class DefaultState : EntityState{
         }
 
           },
-    HIT,
-    DEAD,
+    HIT{
+        override fun enter(entity: AiEntity) {
+            entity.animation(AnimationType.HIT, entity.animCmp.dir)
+        }
+       },
+
+    DEAD{
+        override fun enter(entity: AiEntity) {
+            entity.root(true)
+        }
+
+        },
+    RESURRECT{
+        override fun enter(entity: AiEntity) {
+            entity.enableGlobalState(true)
+            entity.animation(AnimationType.DEAD,DirectionType.NONE, PlayMode.REVERSED, true)
+        }
+
+        override fun update(entity: AiEntity) {
+            if (entity.isAnimationDone){
+                entity.state(IDLE)
+                entity.root(false)
+            }
+        }
+    },
     SHIELD_STATIC,
     SHIELD_HIT,
     CLIMB,
@@ -61,5 +93,12 @@ enum class DefaultState : EntityState{
 }
 
 enum class DefaultGlobalState: EntityState{
-    CHECK_ALIVE, CHECK_SHIELD, CHECK_HIT
+    CHECK_ALIVE{
+        override fun update(entity: AiEntity) {
+            if(entity.isDead){
+                entity.enableGlobalState(false)
+                entity.state(DefaultState.DEAD, true)
+            }
+        }
+               }, CHECK_SHIELD, CHECK_HIT
 }

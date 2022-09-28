@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 
 enum class AnimationModel{
-    CHAR, PHANTOM, CHEST, UNDEFINED;
+    CHAR, PHANTOM, SLIME, GHOUL, CHEST, UNDEFINED;
 
     var atlasKey: String = this.toString().lowercase()
 }

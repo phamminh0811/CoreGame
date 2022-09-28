@@ -8,10 +8,12 @@ import ktx.app.gdxError
 import ktx.math.vec2
 
 class UpdatableImage: Image() {
+    var isChar = false
     var isAttacking = false
     var size = vec2()
     var dir = DirectionType.NONE
 
+    var isFlip = false
     override fun draw(batch: Batch, parentAlpha: Float) {
         validate()
 
@@ -48,6 +50,8 @@ class UpdatableImage: Image() {
                             }
                         }
                         a
+                    } else if (isFlip && !isChar){
+                        x+ imageX + imageWidth * scaleX
                     } else x+ imageX,
                     if (isAttacking){
                         val b : Float
@@ -74,7 +78,7 @@ class UpdatableImage: Image() {
                     originY - imageY,
                     if (isAttacking) size.x else imageWidth,
                     if (isAttacking) size.y else imageHeight,
-                    scaleX,
+                    if (isFlip && !isChar) -scaleX else scaleX,
                     scaleY,
                     rotation
                 )
@@ -103,6 +107,8 @@ class UpdatableImage: Image() {
                     }
                 }
                 a
+            } else if (isFlip  && !isChar){
+                x+ imageX + imageWidth * scaleX
             } else x+ imageX,
             if (isAttacking){
                 val b : Float
@@ -125,7 +131,7 @@ class UpdatableImage: Image() {
                 }
                 b
             } else y + imageY,
-            if (isAttacking) size.x * scaleX else imageWidth * scaleX,
+            if (isAttacking) size.x * scaleX else if (isFlip  && !isChar) { -imageWidth * scaleX} else imageWidth * scaleX,
             if (isAttacking) size.y * scaleY else imageHeight * scaleY
         )
     }
