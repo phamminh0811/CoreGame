@@ -41,11 +41,9 @@ class AttackSystem(
 
     private fun updateAttackImage(entity: Entity, dir: DirectionType){
         imageCmps.getOrNull(entity)?.let { imageCmp ->
-           if (imageCmp.image?.isChar == true){
                imageCmp.image?.isAttacking = true
                imageCmp.image?.dir = dir
                imageCmp.image?.size = attackSize(dir)
-           }
         }
     }
 
@@ -69,7 +67,7 @@ class AttackSystem(
 
         if(attackCmp.isPrepared && attackCmp.doAttack){
 //            attack intention and is ready to attack -> start the attack
-            updateAttackImage(entity, animation.dir)
+//            updateAttackImage(entity, animation.dir)
             attackCmp.doAttack = false
             attackCmp.state = AttackState.ATTACKING
             attackCmp.delay = attackCmp.maxDelay

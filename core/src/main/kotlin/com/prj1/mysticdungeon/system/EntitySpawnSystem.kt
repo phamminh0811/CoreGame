@@ -159,7 +159,7 @@ class EntitySpawnSystem(
             "Slime" -> SpawnCfg(
                 AnimationModel.SLIME,
                 lifeScaling = 0.5f,
-                attackExtraFrontRange = 0.5f,
+                attackExtraFrontRange = 1f,
                 physicScaling = vec2(0.4f, 0.4f),
                 aiTreePath = "ai/enemy.tree"
             )

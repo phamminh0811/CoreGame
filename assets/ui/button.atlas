@@ -1,0 +1,27 @@
+
+button.png
+size: 512, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+exit_button
+  rotate: false
+  xy: 2, 139
+  size: 406, 135
+  orig: 406, 135
+  offset: 0, 0
+  index: -1
+option_button
+  rotate: false
+  xy: 2, 2
+  size: 406, 135
+  orig: 406, 135
+  offset: 0, 0
+  index: -1
+start_button
+  rotate: false
+  xy: 2, 276
+  size: 406, 135
+  orig: 406, 135
+  offset: 0, 0
+  index: -1

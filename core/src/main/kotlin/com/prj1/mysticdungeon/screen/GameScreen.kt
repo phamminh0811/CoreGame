@@ -1,13 +1,18 @@
 package com.prj1.mysticdungeon.screen
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.ai.GdxAI
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.ExtendViewport
+import com.badlogic.gdx.utils.viewport.FitViewport
 import com.github.quillraven.fleks.world
+import com.prj1.mysticdungeon.MysticDungeon
 import com.prj1.mysticdungeon.component.AiComponent
 import com.prj1.mysticdungeon.component.AiComponent.Companion.AiComponentListener
 import com.prj1.mysticdungeon.component.FloatingTextComponent.Companion.FloatingTextComponentListener
@@ -19,11 +24,18 @@ import com.prj1.mysticdungeon.event.fire
 import com.prj1.mysticdungeon.input.PlayerKeyboardInputProcessor
 import com.prj1.mysticdungeon.system.*
 import ktx.app.KtxScreen
+import ktx.assets.async.AssetStorage
+import ktx.assets.disposeSafely
 import ktx.box2d.createWorld
 import ktx.log.logger
 import ktx.math.vec2
+import ktx.scene2d.actors
+import ktx.scene2d.label
+import ktx.scene2d.stack
+import ktx.scene2d.table
 
-class GameScreen : KtxScreen{
+class GameScreen() : KtxScreen{
+
     private var gameStage: Stage = Stage(ExtendViewport(16f,9f))
     private var uiStage: Stage = Stage(ExtendViewport(1280f, 720f))
     private var textureAtlas =  TextureAtlas("graphics/gameObject.atlas")
@@ -83,6 +95,7 @@ class GameScreen : KtxScreen{
         PlayerKeyboardInputProcessor(eWorld)
     }
 
+
     override fun resize(width: Int, height: Int) {
         gameStage.viewport.update(width, height, true)
         uiStage.viewport.update(width, height, true)
@@ -95,12 +108,12 @@ class GameScreen : KtxScreen{
     }
 
     override fun dispose() {
-        gameStage.dispose()
-        uiStage.dispose()
-        textureAtlas.dispose()
+        gameStage.disposeSafely()
+        uiStage.disposeSafely()
+        textureAtlas.disposeSafely()
         eWorld.dispose()
-        currentMap?.dispose()
-        phWorld.dispose()
+        currentMap?.disposeSafely()
+        phWorld.disposeSafely()
     }
 
     companion object{
