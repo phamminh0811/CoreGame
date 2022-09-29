@@ -73,6 +73,7 @@ class GameScreen() : KtxScreen{
             add<AnimationSystem>()
             add<StateSystem>()
             add<AiSystem>()
+            add<LootSystem>()
             add<CameraSystem>()
             add<FloatingTextSystem>()
             add<RenderSystem>()

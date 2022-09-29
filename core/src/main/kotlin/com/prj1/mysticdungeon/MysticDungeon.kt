@@ -9,6 +9,7 @@ import com.prj1.mysticdungeon.asset.BitmapFontAsset
 import com.prj1.mysticdungeon.asset.TextureAtlasAsset
 import com.prj1.mysticdungeon.screen.GameScreen
 import com.prj1.mysticdungeon.screen.LoadingScreen
+import com.prj1.mysticdungeon.screen.UiScreen
 import com.prj1.mysticdungeon.ui.createSkin
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
@@ -44,6 +45,9 @@ class MysticDungeon : KtxGame<KtxScreen>(){
             addScreen(LoadingScreen(this@MysticDungeon))
             setScreen<LoadingScreen>()
         }
+
+//        addScreen(UiScreen())
+//        setScreen<UiScreen>()
     }
 
     override fun dispose() {

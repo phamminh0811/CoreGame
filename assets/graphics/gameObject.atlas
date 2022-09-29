@@ -1243,93 +1243,100 @@ ghoul_run_right
   orig: 32, 32
   offset: 0, 0
   index: 7
-phantom_dead
+phantom_attack_right
   rotate: false
   xy: 1502, 154
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+phantom_idle_right
+  rotate: false
+  xy: 1502, 154
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+phantom_dead
+  rotate: false
+  xy: 1552, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 phantom_dead
   rotate: false
-  xy: 1552, 154
+  xy: 1602, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 phantom_death_left
   rotate: false
-  xy: 1552, 154
+  xy: 1602, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 phantom_dead
   rotate: false
-  xy: 1602, 154
+  xy: 1652, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 phantom_death_left
   rotate: false
-  xy: 1602, 154
+  xy: 1652, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 phantom_dead
   rotate: false
-  xy: 1652, 154
+  xy: 1702, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
 phantom_death_left
   rotate: false
-  xy: 1652, 154
+  xy: 1702, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
 phantom_dead
   rotate: false
-  xy: 1702, 154
+  xy: 1752, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 4
 phantom_death_left
   rotate: false
-  xy: 1702, 154
+  xy: 1752, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 4
 phantom_dead
   rotate: false
-  xy: 1752, 154
+  xy: 1802, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 5
 phantom_death_left
   rotate: false
-  xy: 1752, 154
+  xy: 1802, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 5
 phantom_dead
   rotate: false
-  xy: 1802, 154
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 7
-phantom_death_left
-  rotate: false
-  xy: 1802, 154
+  xy: 1852, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -1340,127 +1347,148 @@ phantom_death_left
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 7
 phantom_death_left
   rotate: false
   xy: 1902, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 6
-phantom_dead
-  rotate: false
-  xy: 1902, 154
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 6
-phantom_hit_left
+  index: 0
+phantom_death_left
   rotate: false
   xy: 1952, 154
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 6
+phantom_dead
+  rotate: false
+  xy: 1952, 154
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
 phantom_hit_left
   rotate: false
   xy: 2, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: 0
 phantom_hit_left
   rotate: false
   xy: 52, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
+  index: 1
 phantom_hit_left
   rotate: false
   xy: 102, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
-phantom_hit_right
+  index: 2
+phantom_hit_left
   rotate: false
   xy: 152, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 3
 phantom_hit_right
   rotate: false
   xy: 202, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: 0
 phantom_hit_right
   rotate: false
   xy: 252, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
+  index: 1
 phantom_hit_right
   rotate: false
   xy: 302, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
-phantom_idle_left
+  index: 2
+phantom_hit_right
   rotate: false
   xy: 352, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 3
 phantom_idle_left
   rotate: false
   xy: 402, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: 0
 phantom_idle_left
   rotate: false
   xy: 452, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
+  index: 1
 phantom_idle_left
   rotate: false
   xy: 502, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
-phantom_idle_right
+  index: 2
+phantom_idle_left
   rotate: false
   xy: 552, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 3
 phantom_idle_right
   rotate: false
   xy: 602, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: 0
+phantom_attack_right
+  rotate: false
+  xy: 602, 204
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
 phantom_idle_right
   rotate: false
   xy: 652, 204
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
+  index: 1
+phantom_attack_right
+  rotate: false
+  xy: 652, 204
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
 phantom_idle_right
+  rotate: false
+  xy: 702, 204
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+phantom_attack_right
   rotate: false
   xy: 702, 204
   size: 16, 16
